@@ -4,14 +4,14 @@ import { useRouter } from 'next/navigation';
 
 export default function Users() {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) router.push('/login');
-    else fetchUsers();
-  }, [router]);
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token')) router.push('/login');
+  //   else fetchUsers();
+  // }, [router]);
 
   const fetchUsers = async () => {
     try {
@@ -21,7 +21,7 @@ export default function Users() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setUsers(data);
-      setLoading(false);
+      // setLoading(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);

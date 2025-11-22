@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation';
 export default function Inventory() {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '', stock_quantity: 0, image_url: '' });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) router.push('/login');
-    else fetchProducts();
-  }, [router]);
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token')) router.push('/login');
+  //   else fetchProducts();
+  // }, [router]);
 
   const fetchProducts = async () => {
     try {
@@ -22,7 +22,7 @@ export default function Inventory() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setProducts(data);
-      setLoading(false);
+      // setLoading(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);

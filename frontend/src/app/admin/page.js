@@ -5,9 +5,7 @@ import { useEffect } from 'react';
 export default function AdminDashboard() {
   const router = useRouter();
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) router.push('/login');
-  }, [router]);
+ 
 
   const logout = () => {
     localStorage.removeItem('token');

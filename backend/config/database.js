@@ -1,16 +1,14 @@
-const { Sequelize } = require('sequelize');
-const fs = require('fs');
-require('dotenv').config({ path: './.env' });
-console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'Loaded!' : 'Missing!');  // Add this line
+const { Sequelize } = require("sequelize");
+
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'mysql',
+  dialect: "mysql",
+  logging: false,
   dialectOptions: {
     ssl: {
-      ca: fs.readFileSync('./ca.pem'),
-      rejectUnauthorized: true,
+      require: true,
+      rejectUnauthorized: false,
     },
   },
-  logging: false,
 });
 
 module.exports = sequelize;
